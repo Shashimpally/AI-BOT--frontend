@@ -1,0 +1,21 @@
+{
+  "name": "AI Bot",
+  "short_name": "AIBot",
+  "description": "A smart and responsive AI assistant bot.",
+  "start_url": "html.html",
+  "display": "standalone",
+  "background_color": "#0e0e0e",
+  "theme_color": "#00ffff",
+  "icons": [
+    {
+      "src": "ai-logo.png.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "ai-logo.png.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
