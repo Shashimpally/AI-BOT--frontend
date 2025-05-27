@@ -1,74 +1,97 @@
-<<<<<<< HEAD
-# Getting Started with Create React App
+# AI-BOT Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a React-based frontend project for the AI-BOT application.  
+It includes setup instructions for building and deploying the app using **Docker** and **Jenkins**.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Technologies Used
 
-### `npm start`
+- React
+- Node.js
+- Docker
+- Jenkins
+- Nginx (for serving the build)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🐳 Docker Setup
 
-### `npm test`
+This project includes a `Dockerfile` to build and run the React app using Docker.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 🔧 Build the Docker Image
 
-### `npm run build`
+```bash
+docker build -t ai-bot-frontend .
+````
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### ▶️ Run the Container
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+docker run -d -p 3000:80 ai-bot-frontend
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* The app will be accessible at: **[http://localhost:3000](http://localhost:3000)**
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🧰 Jenkins Setup
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+We use Jenkins to automate the build and deployment process.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### ✅ Jenkinsfile Includes:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. **Cloning** the code from GitHub
+2. **Installing** project dependencies
+3. **Building** the React app
+4. **Deploying** the built files to a web server directory (e.g. `/var/www/html`)
 
-## Learn More
+### 📝 Jenkinsfile
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Make sure this file is in the root of your project:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```groovy
+pipeline {
+    agent any
 
-### Code Splitting
+    environment {
+        NODE_ENV = 'production'
+    }
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+    stages {
+        stage('Clone the code') {
+            steps {
+                git 'https://github.com/Shashimpally/AI-BOT--frontend'
+            }
+        }
 
-### Analyzing the Bundle Size
+        stage('Install packages') {
+            steps {
+                sh 'npm install'
+            }
+        }
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+        stage('Build the app') {
+            steps {
+                sh 'npm run build'
+            }
+        }
 
-### Making a Progressive Web App
+        stage('Deploy the app') {
+            steps {
+                sh 'cp -r build/* /var/www/html/'
+            }
+        }
+    }
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+## 📌 Notes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+* Update paths in the `Jenkinsfile` if your server uses a different deployment folder.
+* You can modify the Dockerfile to use custom Nginx configs or environment variables if needed.
+* Make sure Node.js, Docker, and Jenkins are installed and configured on your server or CI machine.
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-=======
-# AI-BOT--frontend
->>>>>>> 9b329c97a397d9bd5c4f6c230afb70bec715c4e4
